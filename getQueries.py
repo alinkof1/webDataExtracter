@@ -2,6 +2,91 @@
 #queries a search result through amazon.com's search engine
 #returns an object list of the top results
 
+from lxml import html
+import requests
+import re
+import logging
+import urllib2
+
+XPATH_NAME = './/h2/text()'
+XPATH_SALE_PRICE = '//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()'
+#XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
+XPATH_CATEGORY = '//a[@class="a-link-normal a-color-tertiary"]//text()'
+XPATH_AVAILABILITY = '//div[@id="availability"]//text()'
+
+#Website Constants
+#Specify which web query and browser emulator here
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
+BASE_URL = "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="
+
+#specify number of products crawled per item
+NUM_PRODUCTS = 1
+
+class results(object):
+	def __init__(self):
+		self.items = []
+		self.product_names = []
+		self.product_prices = []
+		self.product_categories = []
+		self.products = []
+		
+		self.user_query = []
+		self.all_queries = []
+		
+		with open('reqs.txt', 'r') as reqs:
+			self.user_query = (reqs.read()).split('\n')
+			
+		for w in (self.user_query):
+			if (w):
+				w = re.sub(r"\s+", '+', w)
+				self.all_queries.append(w)
+		print self.all_queries
+
+
+	def search_query(self):
+		for w in self.all_queries:
+			if(w):
+				req = BASE_URL
+				req = req + ('%s' % str(w))
+
+				#pull html from the webpage request through amazon
+				page = requests.get(req,headers=headers)
+				#page.raise_for_status()	#for error codes		
+				tree = html.fromstring(page.content)
+				
+				#Iterate through the specified # of results
+				for i in range(NUM_PRODUCTS):
+					XPATH_BASE = '//li[@id="result_' + str(i) + '"]'
+					self.items.append(tree.xpath(XPATH_BASE))
+					print self.items[i]
+				
+				#iterate through each product result on amazon 0x7fa183258310> 0x7f92531ad2b8>
+				for item in self.items:
+					print item[0].xpath(XPATH_NAME)
+					self.product_names.append(item[0].xpath(XPATH_NAME))
+					self.product_prices.append(tree.xpath(XPATH_SALE_PRICE))
+					self.product_categories.append(tree.xpath(XPATH_CATEGORY))
+					self.products.append("%s %s %s" % (str(self.product_names), str(self.product_prices), str(self.product_categories)))
+				
+				del self.items[:], self.product_names[:], self.product_prices[:], self.product_categories[:]
+				"""
+				[image,details] = event.xpath("*")
+        	    em = Event() #em = Event Model
+                em["url"]="%s%s" % (base_url,details.xpath("a")[0].get("href")[1:])
+                em["web_id"] = em["url"].split("/")[-1]
+				em["title"]=details.xpath("a/h4")[0].text_content().strip()
+            	em["short_description"] =details.xpath("div/p")[0].text_content().strip()
+            	"""
+         
+		#return self.products
+
+if __name__ == "__main__":
+
+    amzn = results()
+    #print amzn.search_query()
+    amzn.search_query()
+
+
 """
 	python script load up search results
 		parse through for links to product pages
@@ -11,59 +96,3 @@
 
 	resultscol element in html
 """
-
-from lxml import html
-import requests
-import re
-
-XPATH_NAME = '//h1[@id="title"]//text()'
-XPATH_SALE_PRICE = '//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()'
-XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
-XPATH_CATEGORY = '//a[@class="a-link-normal a-color-tertiary"]//text()'
-XPATH_AVAILABILITY = '//div[@id="availability"]//text()'
-REQ = "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
-#XPATH_NAME = tree.xpath('//div[@title="buyer-name"]/text()')
-
-
-class results(object):
-	def __init__(self):
-		self.product_names = []
-		self.product_prices = []
-		self.product_categories = []
-		self.products = []
-		self.user_query = []
-		self.all_queries = []
-		with open('reqs.txt', 'r') as reqs:
-			self.user_query = reqs.read()
-			self.user_query = self.user_query.split('\n')
-
-		for i,w in enumerate(self.user_query):
-			if (w):
-				w = re.sub(r"\s+", '+', w)
-				self.all_queries.append(w)
-		print self.all_queries
-
-
-	def search_query(self):
-		for i,w in enumerate(self.all_queries):
-			if(w):
-				req = REQ
-				req = req + ('%s' % str(w))
-	
-				page = requests.get(req,headers=headers)
-				#page.raise_for_status()			
-				tree = html.fromstring(page.content)
-				print tree
-
-				self.product_names.append(tree.xpath(XPATH_NAME))
-				self.product_prices.append(tree.xpath(XPATH_SALE_PRICE))
-				self.product_categories.append(tree.xpath(XPATH_CATEGORY))
-				print self.product_names, self.product_prices, self.product_categories 
-				self.products.append("%s %s %s" % (self.product_names, self.product_prices, self.product_categories))
-		return self.products
-
-if __name__ == "__main__":
-
-    amzn = results()
-    print amzn.search_query()
