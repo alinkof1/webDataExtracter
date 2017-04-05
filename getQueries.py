@@ -9,9 +9,9 @@ import logging
 import urllib2
 
 XPATH_NAME = './/h2/text()'
-XPATH_SALE_PRICE = '//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()'
+XPATH_LINK = './/a[class="a-link-normal a-text-normal"]/@href'
 #XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
-XPATH_CATEGORY = '//a[@class="a-link-normal a-color-tertiary"]//text()'
+XPATH_PRICE = '//a[@class="a-link-normal a-color-tertiary"]//text()'
 XPATH_AVAILABILITY = '//div[@id="availability"]//text()'
 
 #Website Constants
@@ -26,8 +26,8 @@ class results(object):
 	def __init__(self):
 		self.items = []
 		self.product_names = ""
+		self.product_links = ""
 		self.product_prices = ""
-		self.product_categories = ""
 		self.products = []
 		
 		self.user_query = []
@@ -58,18 +58,22 @@ class results(object):
 				for i in range(NUM_PRODUCTS):
 					XPATH_BASE = '//li[@id="result_' + str(i) + '"]'
 					self.items.append(tree.xpath(XPATH_BASE))
-					print self.items[i]
+					#print self.items[i]
 				
 				#iterate through each product result on amazon 0x7fa183258310> 0x7f92531ad2b8>
 				for item in self.items:
 					#print item[0].xpath(XPATH_NAME)
 					self.product_names = item[0].xpath(XPATH_NAME)
-					self.product_prices = item[0].xpath(XPATH_SALE_PRICE)
-					self.product_categories = item[0].xpath(XPATH_CATEGORY)
-					self.products.append("%s %s %s" % (str(self.product_names), str(self.product_prices), str(self.product_categories)))
+					self.product_links = item[0].xpath(XPATH_LINK)
+					self.product_prices = item[0].xpath(XPATH_PRICE)
+					self.products.append("%s %s %s" % (str(self.product_names), str(self.product_links), str(self.product_prices)))
 				
-				del self.items[:], self.product_names[:], self.product_prices[:], self.product_categories[:]
-				print self.products
+				self.product_links = ""
+				self.product_names = ""
+				self.product_prices = ""
+				del self.items[:]
+				
+		print self.products
 		#return self.products
 
 if __name__ == "__main__":
