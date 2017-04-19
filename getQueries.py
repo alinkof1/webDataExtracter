@@ -6,13 +6,15 @@ from lxml import html
 import requests
 import re
 import logging
-import urllib2
+#import urllib2
+import scrapy
+import os
 
-XPATH_NAME = './/h2/text()'
-XPATH_LINK = './/a[class="a-link-normal a-text-normal"]/@href'
+#XPATH_NAME = '//h2/text()'
+#XPATH_PRICE = './/a[@class="a-link-normal a-text-normal"]//@aria-label//text()'
 #XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
-XPATH_PRICE = '//a[@class="a-link-normal a-color-tertiary"]//text()'
-XPATH_AVAILABILITY = '//div[@id="availability"]//text()'
+#XPATH_LINK = './/a[@class="a-size-small a-link-normal a-text-normal"]/@href[1]'
+XPATH_LINK = '(.//a[@class="a-size-small a-link-normal a-text-normal"]/@href)[1]'
 
 #Website Constants
 #Specify which web query and browser emulator here
@@ -24,18 +26,21 @@ NUM_PRODUCTS = 1
 
 class results(object):
 	def __init__(self):
-		self.items = []
-		self.product_names = ""
-		self.product_links = ""
-		self.product_prices = ""
 		self.products = []
 		
 		self.user_query = []
 		self.all_queries = []
 		
-		with open('reqs.txt', 'r') as reqs:
+		#read file that contains the items to be searched through online marketplaces
+		if __name__ == '__main__':
+			cwd = os.getcwd() + "/reqs.txt"
+		else:
+			cwd = os.getcwd() + "/spiders/modules/reqs.txt" #use this if running as part of scrapy spider
+			
+		with open(cwd, 'r') as reqs:
 			self.user_query = (reqs.read()).split('\n')
 			
+		#format each item query to replace whitespace with "+"s
 		for w in (self.user_query):
 			if (w):
 				w = re.sub(r"\s+", '+', w)
@@ -44,43 +49,48 @@ class results(object):
 
 
 	def search_query(self):
+		product_names = ""
+		product_links = ""
+		
 		for w in self.all_queries:
 			if(w):
+				#for each search on an online marketplace, append the specific search query
 				req = BASE_URL
 				req = req + ('%s' % str(w))
-
+				
 				#pull html from the webpage request through amazon
 				page = requests.get(req,headers=headers)
-				#page.raise_for_status()	#for error codes		
+				#page.raise_for_status()	#for error codes
+				
+				#pull the html from the retrieved webpage
 				tree = html.fromstring(page.content)
 				
-				#Iterate through the specified # of results
+				#Iterate through the specified # of results per query
 				for i in range(NUM_PRODUCTS):
 					XPATH_BASE = '//li[@id="result_' + str(i) + '"]'
-					self.items.append(tree.xpath(XPATH_BASE))
-					#print self.items[i]
+					#for item in tree.xpath(XPATH_BASE):
+					items = tree.xpath(XPATH_BASE)
+					#print tree.xpath(XPATH_BASE)
 				
-				#iterate through each product result on amazon 0x7fa183258310> 0x7f92531ad2b8>
-				for item in self.items:
-					#print item[0].xpath(XPATH_NAME)
-					self.product_names = item[0].xpath(XPATH_NAME)
-					self.product_links = item[0].xpath(XPATH_LINK)
-					self.product_prices = item[0].xpath(XPATH_PRICE)
-					self.products.append("%s %s %s" % (str(self.product_names), str(self.product_links), str(self.product_prices)))
+					#print items
+					#iterate through each product result on amazon
+					
+					product_links = items[0].xpath(XPATH_LINK) #good?
+					self.products.append(product_links)
+					#print self.products
+						
+					product_links = ""
+					product_names = ""
+					
+				del items[:]
+		#print self.products		
+		return self.products
 				
-				self.product_links = ""
-				self.product_names = ""
-				self.product_prices = ""
-				del self.items[:]
-				
-		print self.products
-		#return self.products
-
 if __name__ == "__main__":
 
     amzn = results()
     #print amzn.search_query()
-    amzn.search_query()
+    print amzn.search_query()
 
 
 """
