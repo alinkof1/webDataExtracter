@@ -1,0 +1,116 @@
+2017-04-24 15:52:52,898 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 15:52:52,898 - link_extractor - INFO - creating search class
+2017-04-24 15:52:54,291 - link_extractor - INFO - product link sucessfully extracted
+2017-04-24 15:52:55,267 - link_extractor - INFO - product link sucessfully extracted
+2017-04-24 15:52:56,278 - link_extractor - INFO - product link sucessfully extracted
+2017-04-24 15:52:57,401 - link_extractor - INFO - product link sucessfully extracted
+2017-04-24 15:58:57,730 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 15:58:57,731 - link_extractor - INFO - creating search class
+2017-04-24 15:58:58,974 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 15:59:00,086 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 15:59:01,095 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 15:59:02,322 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:03:23,646 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:03:23,646 - link_extractor - INFO - creating search class
+2017-04-24 16:03:24,822 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:03:25,605 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:03:26,483 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:03:27,415 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:05:59,122 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:05:59,122 - link_extractor - INFO - creating search class
+2017-04-24 16:06:00,296 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:06:01,289 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:06:02,509 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:06:03,718 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:11:05,249 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:11:05,250 - link_extractor - INFO - creating search class
+2017-04-24 16:11:06,545 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:11:07,622 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:11:08,903 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:11:10,225 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:18:49,375 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:18:49,376 - link_extractor - INFO - creating search class
+2017-04-24 16:18:50,725 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:18:51,687 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:18:52,665 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:18:53,774 - link_extractor - INFO - ERR: product link cannot be obtained from webpage
+2017-04-24 16:29:30,698 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:29:30,699 - link_extractor - INFO - creating search class
+2017-04-24 16:29:31,961 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:29:32,978 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:29:33,987 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:29:40,173 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:29:43,732 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:29:43,732 - link_extractor - INFO - creating search class
+2017-04-24 16:29:57,652 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:29:57,652 - link_extractor - INFO - creating search class
+2017-04-24 16:29:58,829 - link_extractor - INFO - AttributeError
+2017-04-24 16:29:59,676 - link_extractor - INFO - AttributeError
+2017-04-24 16:30:00,587 - link_extractor - INFO - AttributeError
+2017-04-24 16:30:01,770 - link_extractor - INFO - AttributeError
+2017-04-24 16:33:36,265 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:33:36,267 - link_extractor - INFO - creating search class
+2017-04-24 16:33:37,583 - link_extractor - ERROR - ERR exception:
+Traceback (most recent call last):
+  File "/home/ubuntu/workspace/amzn/amzn/spiders/modules/getQueries.py", line 80, in search_query
+    product_links = product_links.strip("][")
+AttributeError: 'list' object has no attribute 'strip'
+2017-04-24 16:33:38,554 - link_extractor - ERROR - ERR exception:
+Traceback (most recent call last):
+  File "/home/ubuntu/workspace/amzn/amzn/spiders/modules/getQueries.py", line 80, in search_query
+    product_links = product_links.strip("][")
+AttributeError: 'list' object has no attribute 'strip'
+2017-04-24 16:33:39,412 - link_extractor - ERROR - ERR exception:
+Traceback (most recent call last):
+  File "/home/ubuntu/workspace/amzn/amzn/spiders/modules/getQueries.py", line 80, in search_query
+    product_links = product_links.strip("][")
+AttributeError: 'list' object has no attribute 'strip'
+2017-04-24 16:33:40,598 - link_extractor - ERROR - ERR exception:
+Traceback (most recent call last):
+  File "/home/ubuntu/workspace/amzn/amzn/spiders/modules/getQueries.py", line 80, in search_query
+    product_links = product_links.strip("][")
+AttributeError: 'list' object has no attribute 'strip'
+2017-04-24 16:37:36,081 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 16:37:36,081 - link_extractor - INFO - creating search class
+2017-04-24 16:37:37,891 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:37:38,863 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:37:39,968 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 16:37:41,126 - link_extractor - INFO - SUCCESS: product link sucessfully extracted
+2017-04-24 17:01:00,927 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:01:00,928 - link_extractor - INFO - creating search class
+2017-04-24 17:01:52,215 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:01:52,215 - link_extractor - INFO - creating search class
+2017-04-24 17:03:15,545 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:03:15,546 - link_extractor - INFO - creating search class
+2017-04-24 17:03:15,546 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:03:15,546 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:03:15,546 - link_extractor - INFO - creating search class
+2017-04-24 17:03:15,546 - link_extractor - INFO - creating search class
+2017-04-24 17:04:11,055 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:04:11,055 - link_extractor - INFO - creating search class
+2017-04-24 17:04:11,055 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:04:11,055 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:04:11,055 - link_extractor - INFO - creating search class
+2017-04-24 17:04:11,055 - link_extractor - INFO - creating search class
+2017-04-24 17:04:12,700 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:12,700 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:13,761 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:13,761 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:15,682 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:15,682 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:16,750 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:04:16,750 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:05,129 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:08:05,129 - link_extractor - INFO - creating search class
+2017-04-24 17:08:05,129 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:08:05,129 - link_extractor - INFO - -----------------------------------------------
+2017-04-24 17:08:05,130 - link_extractor - INFO - creating search class
+2017-04-24 17:08:05,130 - link_extractor - INFO - creating search class
+2017-04-24 17:08:07,082 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:07,082 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:08,129 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:08,129 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:09,441 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:09,441 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:10,642 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
+2017-04-24 17:08:10,642 - link_extractor - INFO - SUCCESS: product link sucessfully extracted:
